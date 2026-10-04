@@ -1,0 +1,16 @@
+{
+  "name": "Light Astra",
+  "short_name": "Light Astra",
+  "description": "Custom websites and digital experiences by Duong Nguyen. Build • Secure • Automate.",
+  "lang": "en-US",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#f6f2ea",
+  "theme_color": "#f6f2ea",
+  "icons": [
+    { "src": "assets/favicon/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/favicon/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/favicon/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

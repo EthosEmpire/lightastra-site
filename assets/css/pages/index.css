@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Light Astra — home page
+   The hero (statement + jewel), the "what" split, the work list, the founder
+   teaser. Everything else on the page is a shared component.
+   ========================================================================== */
+
+/* ---- hero -------------------------------------------------------------------- */
+.hero {
+  --surface: var(--milk);
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  padding-block: clamp(2.25rem, 1.5rem + 3vw, 4.5rem) clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-7) var(--space-6);
+  align-items: center;
+}
+
+.hero__copy > * + * {
+  margin-top: var(--space-5);
+}
+
+.hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+.hero__title {
+  max-width: 22ch;
+}
+
+.hero__lead {
+  max-width: 50ch;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: var(--ink-2);
+}
+
+.hero__actions {
+  margin-top: var(--space-6);
+}
+
+.hero__reassure {
+  max-width: 46ch;
+}
+
+.hero__jewel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 21rem);
+  margin-inline: auto;
+}
+
+.hero__strip {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.hero__facts li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.hero__location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-4);
+}
+
+/* ---- the work list ----------------------------------------------------------- */
+.work-list {
+  display: grid;
+  gap: clamp(3rem, 2.5rem + 4vw, 6rem);
+}
+
+.project__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.project__action {
+  padding-top: var(--space-2);
+}
+
+/* ---- the founder teaser ------------------------------------------------------- */
+.founder-teaser {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.founder-teaser__media {
+  width: min(100%, 24rem);
+}
+
+.founder-teaser__roles li {
+  color: var(--ink);
+}
+
+/* ---- breakpoints --------------------------------------------------------------- */
+@media (min-width: 600px) {
+  .hero__jewel {
+    width: min(100%, 26rem);
+  }
+
+  .founder-teaser {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .founder-teaser__media {
+    width: 100%;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding-block: clamp(3rem, 1rem + 4vw, 5.5rem) 3.5rem;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-7);
+    min-height: calc(min(100vh, 58rem) - var(--header-h) - 14rem);
+  }
+
+  .hero__lead {
+    font-size: var(--text-xl);
+    line-height: 1.5;
+  }
+
+  .hero__jewel {
+    width: 100%;
+    max-width: 32rem;
+    justify-self: end;
+  }
+
+  .founder-teaser {
+    gap: var(--space-9);
+  }
+}

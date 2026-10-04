@@ -1,0 +1,7 @@
+# Light Astra — https://lightastra.com/
+# Everything public may be crawled. Internal project files are not part of the web root.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://lightastra.com/sitemap.xml

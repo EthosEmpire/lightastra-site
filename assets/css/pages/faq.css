@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Light Astra — FAQ page
+   The hero copy rhythm, the jump list in the hero's second column and the
+   group numerals. The accordion itself (.faq) and the split are shared.
+   ========================================================================== */
+
+
+.page-hero__copy {
+  --flow: var(--space-5);
+}
+
+.page-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+.faq-jump .eyebrow {
+  margin-bottom: var(--space-3);
+}
+
+.faq-jump__list {
+  border-top: var(--border);
+}
+
+.faq-jump__list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--target);
+  padding-block: 0.6rem;
+  border-bottom: var(--border);
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.faq-jump__list a:hover {
+  color: var(--accent);
+}
+
+.faq-jump__list .icon {
+  color: var(--ink-3);
+  transition: transform var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.faq-jump__list a:hover .icon {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* ---- the groups -------------------------------------------------------------- */
+.faq-group__num {
+  display: block;
+  margin-bottom: var(--space-3);
+  color: var(--ink);
+}
+
+.faq__answer > * + * {
+  margin-top: 0.75em;
+}
+
+.faq__answer a {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* The list already closes with a hairline: the foot adds none of its own. */
+.faq + .section__foot {
+  margin-top: var(--space-5);
+  padding-top: var(--space-2);
+  border-top: 0;
+}
+
+@media (min-width: 900px) {
+  .faq-jump {
+    padding-left: var(--space-6);
+    border-left: var(--border);
+  }
+}

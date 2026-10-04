@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Light Astra — pricing page
+   The hero with the at-a-glance rows, the two project cards, the two care
+   plan cards (Astra Plus with the one thin gold line and the honest-limits
+   notice) and the "good to know" definitions. Cards, bullets, notice and
+   figure are shared components.
+   ========================================================================== */
+
+
+.pricing-hero__copy > * + * {
+  margin-top: var(--space-5);
+}
+
+.pricing-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+.pricing-glance {
+  width: 100%;
+}
+
+.pricing-glance .spec__value {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+}
+
+/* ---- cards (projects and plans) ------------------------------------------------ */
+.price-card,
+.plan {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-card > * + *,
+.plan > * + * {
+  margin-top: var(--space-4);
+}
+
+.price-card__title,
+.plan__title,
+.apps-card__title,
+.apps__plans-title {
+  font-size: var(--display-3);
+}
+
+.price {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: var(--space-2);
+}
+
+.price__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.price__value small {
+  margin-left: 0.15rem;
+}
+
+.price-card__text,
+.plan__summary,
+.apps-card__text {
+  color: var(--ink-2);
+}
+
+.price-card__list {
+  margin-top: var(--space-5);
+}
+
+/* The button sits on the card's bottom edge whatever the list length above it. */
+.price-card .card__foot {
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+/* The plan head: the name and, on Astra Plus, the "Most complete" pill. */
+.plan__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* Astra Plus: the plate shadow and one thin gold line along the top edge. */
+.plan--featured {
+  border-color: var(--hairline-strong);
+  box-shadow: var(--shadow-plate);
+}
+
+.plan--featured::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 0 0 2px 2px;
+}
+
+/* Inclusions: a check icon beside each line. */
+.checklist {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: var(--space-5);
+}
+
+.checklist li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: start;
+  color: var(--ink-2);
+}
+
+.checklist .icon {
+  margin-top: 0.2em;
+  color: var(--ink);
+}
+
+.plan__note {
+  margin-top: var(--space-6);
+}
+
+/* ---- good to know -------------------------------------------------------------- */
+.notes__item dt {
+  font-family: var(--font-display);
+  font-size: var(--title);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  color: var(--ink);
+}
+
+.notes__item dd {
+  margin-top: var(--space-3);
+  max-width: 40ch;
+  color: var(--ink-2);
+}
+
+.pricing-faq {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  color: var(--ink-2);
+}
+
+/* ---- breakpoints ----------------------------------------------------------------- */
+/* The two plan cards keep their own heights (Astra Plus lists more). */
+@media (min-width: 600px) {
+  .plans-grid {
+    align-items: start;
+  }
+}
+
+@media (min-width: 900px) {
+  .pricing-glance {
+    max-width: 26rem;
+    justify-self: end;
+  }
+}

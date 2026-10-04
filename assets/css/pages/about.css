@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Light Astra — about page
+   The hero with the page's one brand moment (the landscape lockup on a lifted
+   plate), the mission statement set large, the six working principles and
+   the founder introduction. Everything else is a shared component.
+   ========================================================================== */
+
+
+.about-hero__copy > * + * {
+  margin-top: var(--space-5);
+}
+
+.about-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+.about-hero__copy .actions {
+  margin-top: var(--space-6);
+}
+
+.about-hero__aside {
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+/* The lockup on a paper plate: a hairline frame inside the border, the plate shadow,
+   and depth.js lifts it a little as it travels. */
+.brand-plate {
+  position: relative;
+  padding: clamp(1.75rem, 1.25rem + 3vw, 3.25rem);
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-plate);
+}
+
+.brand-plate::before {
+  content: "";
+  position: absolute;
+  inset: 0.75rem;
+  border: 1px solid var(--hairline);
+  border-radius: calc(var(--radius-md) - 4px);
+  pointer-events: none;
+}
+
+.brand-plate__img {
+  width: 100%;
+  height: auto;
+}
+
+/* ---- why ---------------------------------------------------------------------- */
+.about-why__body {
+  --flow: var(--space-5);
+}
+
+.about-why__body p:not(.lead) {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+}
+
+/* ---- mission ------------------------------------------------------------------- */
+.about-mission__inner {
+  max-width: 54rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.about-mission__inner > * + * {
+  margin-top: var(--space-5);
+}
+
+.about-mission__star {
+  display: block;
+  margin-inline: auto;
+  color: var(--ink);
+}
+
+.about-mission__title {
+  font-size: var(--display-2);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: var(--tracking-display);
+}
+
+/* ---- how I work ----------------------------------------------------------------- */
+.how {
+  display: flex;
+  flex-direction: column;
+}
+
+.how__title {
+  margin-top: var(--space-4);
+  font-size: var(--title);
+}
+
+.how__text {
+  margin-top: var(--space-3);
+  max-width: 34ch;
+  color: var(--ink-2);
+}
+
+.how__text a {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---- where ---------------------------------------------------------------------- */
+.page--about #about-where .eyebrow .icon {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* ---- the founder ------------------------------------------------------------------ */
+.about-founder {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.about-founder__media {
+  width: min(100%, 24rem);
+}
+
+.about-founder__role {
+  font-weight: 500;
+}
+
+.about-founder__role li {
+  color: var(--ink);
+}
+
+/* ---- breakpoints -------------------------------------------------------------------- */
+@media (min-width: 600px) {
+  .about-founder {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .about-founder__media {
+    width: 100%;
+  }
+}
+
+@media (min-width: 900px) {
+  .about-hero__aside {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: 0;
+    justify-self: end;
+  }
+
+  .about-founder {
+    gap: var(--space-9);
+  }
+}

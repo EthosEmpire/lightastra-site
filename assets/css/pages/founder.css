@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Light Astra — founder page
+   The profile hero (portrait on a lifted plate), the story, the capability
+   groups as chips in spec rows, the experience and education timelines and
+   the certifications. Everything else is a shared component.
+   ========================================================================== */
+
+
+.founder-hero__copy > * + * {
+  margin-top: var(--space-5);
+}
+
+.founder-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+.founder-hero__roles {
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.founder-hero__copy .actions {
+  margin-top: var(--space-6);
+}
+
+.founder-hero__copy .page-hero__meta {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.founder-hero__aside {
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+/* ---- story --------------------------------------------------------------------- */
+.founder-story__body {
+  --flow: var(--space-5);
+}
+
+.founder-story__body p:not(.lead) {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+}
+
+/* ---- capabilities -------------------------------------------------------------- */
+.caps .spec__row {
+  padding-block: var(--space-5);
+}
+
+.caps .spec__label {
+  padding-top: 0.45rem;
+}
+
+/* ---- experience and education: hairline rows, the dates in a mono column ---------- */
+.timeline {
+  border-top: var(--border);
+}
+
+.timeline__item {
+  display: grid;
+  gap: var(--space-2) var(--space-6);
+  padding-block: var(--space-5);
+  border-bottom: var(--border);
+}
+
+.timeline__title {
+  font-size: var(--title);
+}
+
+.timeline__org {
+  margin-top: var(--space-2);
+  color: var(--ink-3);
+}
+
+/* ---- certifications ------------------------------------------------------------- */
+.certs {
+  display: grid;
+  gap: 0.75rem var(--space-6);
+  align-content: start;
+}
+
+.certs li + li {
+  margin-top: 0;
+}
+
+.certs li {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ---- breakpoints ------------------------------------------------------------------- */
+@media (min-width: 600px) {
+  .timeline__item {
+    grid-template-columns: minmax(11rem, 15.5rem) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .timeline__when {
+    padding-top: 0.3rem;
+  }
+
+  .certs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  /* The copy centres on the tall portrait instead of sitting on its bottom edge. */
+  .page--founder .page-hero__inner {
+    align-items: center;
+  }
+
+  .founder-hero__aside {
+    width: 100%;
+    max-width: 26rem;
+    margin-inline: 0;
+    justify-self: end;
+  }
+}

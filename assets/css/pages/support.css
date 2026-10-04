@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Light Astra — client support page
+   Only what is unique to Support: the five request-kind cells, the three
+   priority cards and the warning's place in the form. The hero, form controls,
+   choice cards, form/aside layout, next-steps list, contact list, notices,
+   spec rows and the status panel are shared components (components.css).
+   ========================================================================== */
+
+.page-hero__copy {
+  --flow: var(--space-5);
+}
+
+.page-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+/* ---- the five kinds of request ----------------------------------------------------- */
+.support-type {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.support-type__title {
+  margin-top: var(--space-2);
+  font-size: var(--title-sm);
+}
+
+.support-type__text {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+/* ---- priority: three cards from desktop widths ---------------------------------- */
+.support-priority {
+  margin-top: var(--space-2);
+}
+
+/* ---- the warning sits between the fields and the submit button ------------------- */
+.support__warning {
+  margin-top: var(--space-6);
+}
+
+/* ---- breakpoints --------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .support-types {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .support-priority .choice {
+    grid-template-columns: minmax(0, 1fr); /* three options: no orphan beside the shared two-column rule */
+  }
+}
+
+@media (min-width: 900px) {
+  .support-priority .choice {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

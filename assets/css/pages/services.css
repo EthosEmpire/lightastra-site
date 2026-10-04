@@ -1,0 +1,292 @@
+/* ==========================================================================
+   Light Astra — service pages
+   Shared by services, build, secure and automate: the inner-page hero with
+   its fact panel, the pillar columns with their offering lists, the
+   expertise cards, the topic rows of the pillar pages and the related row.
+   Everything else on these pages is a shared component (components.css,
+   layout.css); the per-page files add one detail each.
+   ========================================================================== */
+
+
+.page-hero__copy > * + * {
+  margin-top: var(--space-5);
+}
+
+.page-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+.page-hero__crumbs + .eyebrow {
+  margin-top: var(--space-6);
+}
+
+.page-hero__copy .actions {
+  margin-top: var(--space-6);
+}
+
+/* The fact panel: a paper card holding spec rows ("At a glance"). */
+.hero-facts {
+  width: 100%;
+  padding: clamp(1.25rem, 1rem + 1.25vw, 2rem);
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-facts__title {
+  display: flex;
+  margin-bottom: var(--space-4);
+}
+
+.hero-facts .spec {
+  border-top: 0;
+}
+
+.hero-facts .spec__row:first-child {
+  padding-top: 0;
+}
+
+.hero-facts .spec__row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.hero-facts .spec__value a {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ---- a title with a small tag beside it ("Local / private AI" + Emerging) --------------- */
+.title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ---- the pillar columns (services): icon, linked title, intro, offerings, link ------------ */
+.pillar__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pillar__title a:hover {
+  color: var(--accent);
+}
+
+.pillar__intro {
+  max-width: 38ch;
+  margin-top: var(--space-3);
+  color: var(--ink-2);
+}
+
+.pillar__list {
+  flex: 1 0 auto;
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+}
+
+.pillar__list li {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.pillar__list li + li {
+  margin-top: 0.65rem;
+}
+
+.pillar__list .pill {
+  margin-left: 0.4rem;
+}
+
+.pillar .pillar__cta {
+  align-self: flex-start;
+  margin-top: var(--space-6);
+}
+
+/* The honest-limits note under the pillars. */
+.services-note {
+  margin-top: clamp(2.5rem, 2rem + 3vw, 4rem);
+}
+
+.services-note .notice {
+  max-width: 62rem;
+}
+
+/* ---- supporting expertise (services): three compact cards ------------------------------- */
+.expertise-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.expertise-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.expertise-card .card__text {
+  max-width: 40ch;
+}
+
+.expertise-card .chips {
+  margin-top: auto;
+  padding-top: var(--space-5);
+}
+
+.expertise-card:hover .pillar__icon {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--milk);
+}
+
+/* ---- split heads: eyebrow over title in the sticky column ---------------------------------- */
+.split__aside .eyebrow + .section__title {
+  margin-top: var(--space-4);
+}
+
+/* ---- the topic rows (build, secure, automate): numeral and title left, text and list right -- */
+.topics {
+  display: grid;
+}
+
+.topic {
+  display: grid;
+  gap: var(--space-4) var(--space-8);
+  padding-block: clamp(2.25rem, 1.75rem + 2vw, 3.75rem);
+}
+
+.topic + .topic {
+  border-top: var(--border);
+}
+
+.topic:first-child {
+  padding-top: 0;
+}
+
+.topic:last-child {
+  padding-bottom: 0;
+}
+
+.topic__head {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.topic__title {
+  max-width: 20ch;
+  font-size: var(--display-3);
+}
+
+.topic__body {
+  max-width: 62ch;
+}
+
+.topic__body > * + * {
+  margin-top: var(--space-5);
+}
+
+.topic__text {
+  font-size: var(--text-md);
+  color: var(--ink-2);
+}
+
+.topic__body .bullets li + li {
+  margin-top: 0.65rem;
+}
+
+/* ---- the related row (pillar pages): the other two pillars and the overview --------------- */
+.related__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.related__card .pillar__icon {
+  margin-bottom: var(--space-5);
+}
+
+.related__card .card__text {
+  max-width: 36ch;
+}
+
+.related__cta {
+  margin-top: auto;
+  padding-top: var(--space-5);
+}
+
+.related__card:hover .pillar__icon {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--milk);
+}
+
+.related__card:hover .related__cta {
+  color: var(--accent);
+}
+
+.related__card:hover .related__cta .icon--arrow {
+  transform: translateX(4px);
+}
+
+/* ---- breakpoints ----------------------------------------------------------------------------- */
+/* Phones: the two hero buttons stack as full-width rows. */
+@media (max-width: 599.98px) {
+  .page-hero__copy .actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* The panel's label column is narrower than the page-wide spec default (6–10rem), so the values
+   keep a readable measure in the 5/12 hero column at 900–1200px. */
+@media (min-width: 600px) {
+  .hero-facts .spec__row {
+    grid-template-columns: minmax(5.5rem, 6.5rem) 1fr;
+    column-gap: var(--space-4);
+  }
+}
+
+/* Tablets show two columns: a lone third card spans the row instead of sitting half-width. */
+@media (min-width: 600px) and (max-width: 899.98px) {
+  .expertise > :last-child:nth-child(odd),
+  .related > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Side by side, the three pillars share one set of rows (head, title, intro, list, link), so
+   the hairline above each list and the Learn more links line up whatever the intros wrap to.
+   Without subgrid support the flex column from components.css stays in charge. */
+@media (min-width: 768px) {
+  @supports (grid-template-rows: subgrid) {
+    .pillars {
+      grid-template-rows: auto auto auto 1fr auto;
+    }
+
+    .pillar {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 5;
+      align-content: start;
+    }
+
+    .pillar__list {
+      align-self: start;
+    }
+
+    .pillar .pillar__cta {
+      align-self: start;
+      justify-self: start;
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .topic {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}

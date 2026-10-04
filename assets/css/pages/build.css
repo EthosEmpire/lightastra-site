@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Light Astra — build page
+   One detail on top of the shared service-page styles (pages/services.css):
+   the "What you get" list reads as a checklist, each outcome with a small
+   boxed check instead of the star bullet.
+   ========================================================================== */
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.checklist li + li {
+  margin-top: 0.65rem;
+}
+
+.checklist__icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.1em;
+  padding: 0.2rem;
+  border: var(--border-strong);
+  border-radius: var(--radius-xs);
+  stroke-width: 2;
+}

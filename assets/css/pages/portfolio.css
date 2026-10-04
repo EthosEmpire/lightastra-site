@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Light Astra — work page
+   The hero with the project index, the two project plates set wide, the
+   closing line. The plates themselves are the shared .project component.
+   ========================================================================== */
+
+
+.work-hero__copy > * + * {
+  margin-top: var(--space-5);
+}
+
+.work-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+/* The index: hairline rows that jump to each project. */
+.work-index__list {
+  border-top: var(--border);
+}
+
+.work-index__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 3.25rem;
+  padding-block: 0.5rem;
+  border-bottom: var(--border);
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.work-index__link .icon {
+  margin-left: auto;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.work-index__link:hover {
+  color: var(--accent);
+}
+
+.work-index__link:hover .icon--arrow {
+  transform: translateX(3px);
+}
+
+/* ---- the project plates ----------------------------------------------------------- */
+.work .project__title {
+  font-size: var(--display-2);
+}
+
+.work__desc {
+  font-size: var(--text-lg);
+  color: var(--ink-2);
+}
+
+.project__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.project__mark {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.project__action {
+  padding-top: var(--space-2);
+}
+
+/* ---- the closing line -------------------------------------------------------------- */
+.work-cta__title {
+  font-family: var(--font-display);
+  font-size: var(--display-3);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  color: var(--ink);
+}
+
+/* ---- breakpoints -------------------------------------------------------------------- */
+@media (min-width: 900px) {
+  .work-index {
+    width: 100%;
+    max-width: 26rem;
+    justify-self: end;
+  }
+}

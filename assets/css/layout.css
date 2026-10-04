@@ -1,0 +1,558 @@
+/* ==========================================================================
+   Light Astra — layout
+   Containers and grids, the header and its navigation, sections and their
+   heads, page heroes for inner pages, the footer. Mobile-first; the
+   breakpoint overrides live in responsive.css.
+   ========================================================================== */
+
+/* ---- containers ------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--wide {
+  max-width: calc(var(--container-wide) + 2 * var(--gutter));
+}
+
+.container--narrow {
+  max-width: calc(var(--container-narrow) + 2 * var(--gutter));
+}
+
+.container--text {
+  max-width: calc(var(--container-text) + 2 * var(--gutter));
+}
+
+/* ---- grids ------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--space-5));
+  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+}
+
+/* Columns separated by hairlines: three pillars, four steps, spec rows. */
+.grid--ruled {
+  gap: 0;
+}
+
+.grid--ruled > * {
+  padding-block: var(--space-5);
+  border-top: var(--border);
+}
+
+.grid--ruled > *:first-child {
+  border-top: 0;
+}
+
+/* Two-column editorial split: a sticky title column and a reading column. */
+.split {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.split__aside {
+  align-self: start;
+}
+
+/* ---- header ---------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* The frosted milk is a pseudo-element: a backdrop-filter on the header itself would make it
+   the containing block of the phone menu sheet (position: fixed) and collapse the sheet. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(246 242 234 / 0.88);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: var(--hairline);
+  box-shadow: 0 12px 32px -24px rgb(16 16 20 / 0.35);
+}
+
+.site-header__bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-template-areas: "brand . cta toggle";
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--header-h);
+}
+
+.brand {
+  grid-area: brand;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: var(--target);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand__star {
+  width: 1.75rem;
+  height: 1.75rem;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.brand:hover .brand__star {
+  transform: rotate(90deg) scale(1.06);
+}
+
+/* The LIGHT ASTRA text row of the square lockup (960px artwork: 780 x 54 at 94, 812),
+   cropped so the real wordmark is legible beside the star at every header size. */
+.brand__word {
+  --word-w: 8rem;
+  position: relative;
+  display: block;
+  width: var(--word-w);
+  aspect-ratio: 780 / 54;
+  overflow: hidden;
+}
+
+.brand__word-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 123.08%;
+  max-width: none;
+  height: auto;
+  margin-top: -104.1%;
+  margin-left: -12.05%;
+}
+
+@media (min-width: 600px) {
+  .brand__word {
+    --word-w: 10.2rem;
+  }
+}
+
+.site-header__cta {
+  grid-area: cta;
+}
+
+/* 44px pointer target even as a small button (outranks .btn--sm, which loads later). */
+.site-header__cta.btn--sm {
+  min-height: var(--target);
+}
+
+.site-header__cta-prefix {
+  display: none;
+}
+
+.menu-toggle {
+  grid-area: toggle;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: var(--target);
+  padding: 0 0.25rem 0 0.75rem;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.menu-toggle__icon {
+  position: relative;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.menu-toggle__icon span {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+
+.menu-toggle__icon span:first-child {
+  top: 8px;
+}
+
+.menu-toggle__icon span:last-child {
+  top: 15px;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__icon span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__icon span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* Without JavaScript the navigation is a plain row under the bar and the button is gone. */
+html:not(.js) .menu-toggle {
+  display: none;
+}
+
+.site-nav {
+  grid-column: 1 / -1;
+  padding-block: var(--space-3) var(--space-4);
+  border-top: var(--border);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+
+.site-nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.55rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.site-nav__link:hover {
+  color: var(--ink);
+}
+
+.site-nav__link:hover::after,
+.site-nav__link[aria-current]::after {
+  transform: scaleX(1);
+}
+
+.site-nav__foot {
+  display: none;
+}
+
+.site-nav__meta {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+/* With JavaScript: closed by default, a sheet when open (responsive.css shapes it per width). */
+html.js .site-nav {
+  display: none;
+}
+
+html.js .site-header.is-menu-open .site-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+html.js .is-menu-open .site-nav__foot {
+  display: block;
+}
+
+/* ---- sections ----------------------------------------------------------------- */
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+  background: var(--surface);
+  overflow-x: clip;    /* watermarks may hang past the edge; clip (not hidden) keeps sticky children working */
+}
+
+/* A section that opens with the star rule: the rule sits just inside its top edge. */
+.section--divided {
+  padding-top: var(--space-4);
+}
+
+.section__rule {
+  margin-bottom: var(--section-y);
+}
+
+.section--soft {
+  --surface: var(--milk-soft);
+}
+
+.section--deep {
+  --surface: var(--milk-deep);
+}
+
+.section--tight {
+  padding-block: var(--section-y-tight);
+}
+
+.section--flush-top {
+  padding-top: 0;
+}
+
+.section--flush-bottom {
+  padding-bottom: 0;
+}
+
+.section--ruled {
+  border-top: var(--border);
+}
+
+.section__head {
+  max-width: var(--container-narrow);
+  margin-bottom: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.section__head > * + * {
+  margin-top: var(--space-4);
+}
+
+.section__head .eyebrow + .section__title {
+  margin-top: var(--space-4);
+}
+
+.section__title {
+  font-size: var(--display-2);
+}
+
+.section__lead {
+  max-width: var(--container-text);
+  font-size: var(--text-lg);
+  color: var(--ink-2);
+}
+
+/* A head that becomes two columns on desktop: title left, lead and link right. */
+.section__head--split {
+  max-width: none;
+  display: grid;
+  gap: var(--space-4) var(--space-7);
+}
+
+.section__head--split > * + * {
+  margin-top: 0;
+}
+
+.section__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  margin-top: clamp(2.5rem, 2rem + 3vw, 4rem);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+}
+
+/* ---- page hero (inner pages) ---------------------------------------------------- */
+.page-hero {
+  position: relative;
+  padding-block: clamp(3rem, 2rem + 5vw, 7rem) clamp(2.5rem, 2rem + 3vw, 5rem);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.page-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-5);
+}
+
+.page-hero__title {
+  max-width: 16ch;
+  font-size: var(--display-1);
+}
+
+.page-hero__lead {
+  max-width: var(--container-text);
+  font-size: var(--text-xl);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.page-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+/* A centred variant: the not-found page, a thank-you page, any short page with one message.
+   It needs no page stylesheet, so it stays valid at any URL depth. */
+.page-hero--center {
+  display: grid;
+  align-items: center;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+  text-align: center;
+}
+
+.page-hero--center .page-hero__inner {
+  position: relative;
+  z-index: 1;
+  justify-items: center;
+}
+
+.page-hero__brand {
+  width: min(100%, 40rem);
+  height: auto;
+  margin-bottom: var(--space-4);
+}
+
+.page-hero--center .page-hero__title {
+  max-width: 14ch;
+  font-size: var(--display-2);
+}
+
+.page-hero--center .page-hero__lead {
+  max-width: 44ch;
+}
+
+.page-hero--center .actions {
+  justify-content: center;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+}
+
+.breadcrumbs li + li::before {
+  content: "/";
+  margin-right: 0.5rem;
+  color: var(--ink-4);
+}
+
+/* ---- footer ----------------------------------------------------------------------- */
+.site-footer {
+  --surface: var(--milk-deep);
+  background: var(--surface);
+  border-top: var(--border);
+  padding-block: clamp(3rem, 2.5rem + 3vw, 5rem) var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7) var(--space-5);
+}
+
+.site-footer__brand {
+  grid-column: 1 / -1;
+}
+
+.site-footer__brand > * + * {
+  margin-top: var(--space-3);
+}
+
+.site-footer__lockup {
+  width: 7rem;
+  height: 7rem;
+  margin-left: -0.5rem;    /* optical: the star's left ray sits on the column edge */
+}
+
+.site-footer__tagline {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.site-footer__line {
+  max-width: 32ch;
+  color: var(--ink-2);
+}
+
+.site-footer__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+}
+
+.site-footer__facts li + li::before {
+  content: "·";
+  margin-right: 0.75rem;
+  color: var(--ink-4);
+}
+
+.site-footer__contact a {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.site-footer__heading {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.site-footer__col + .site-footer__col {
+  margin-top: 0;
+}
+
+.site-footer__subnav {
+  margin-top: var(--space-5);
+}
+
+.site-footer__links li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.site-footer__links li a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.site-footer__base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  margin-top: clamp(2.5rem, 2rem + 3vw, 4rem);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+}
+
+.site-footer__base a {
+  text-decoration: none;
+}

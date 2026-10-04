@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Light Astra — contact page
+   The hero copy rhythm and the three hairline-ruled "ways" cells. The split
+   and the closing band are shared components.
+   ========================================================================== */
+
+
+.page-hero__copy {
+  --flow: var(--space-5);
+}
+
+.page-hero__copy .eyebrow {
+  color: var(--ink);
+}
+
+.page-hero__copy .actions {
+  margin-top: var(--space-6);
+}
+
+/* ---- the three ways (email, Instagram, location) ---------------------------------- */
+.way {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.way__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+}
+
+.way__title {
+  font-size: var(--display-3);
+}
+
+.way__value {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.way__value .link-arrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--text-md);
+}
+
+.way .mailline .btn {
+  flex: none;
+}
+
+.way__text {
+  max-width: 34ch;
+  color: var(--ink-2);
+}
+
+/* The ruled grid gives the cells their hairlines; the first row carries no top rule, so it
+   needs no top padding either (one cell per row on phones, two from 600px, three from 900px). */
+.ways.grid--ruled > *:first-child {
+  padding-top: 0;
+}
+
+@media (min-width: 600px) {
+  .ways.grid--ruled > *:nth-child(-n + 2) {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .ways.grid--ruled > * {
+    padding-top: 0;
+  }
+}

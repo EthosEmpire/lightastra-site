@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Light Astra — quote page
+   The hero's fact column only. The form / aside layout, fieldset groups, choice
+   cards, the "what happens next" list, the contact list and the status panel are
+   shared components (components.css), also used by the support page.
+   ========================================================================== */
+
+.page-hero__copy {
+  --flow: var(--space-5);
+}
+
+.page-hero__copy .eyebrow {
+  color: var(--ink);
+}

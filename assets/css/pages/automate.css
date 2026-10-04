@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Light Astra — automate page
+   One detail on top of the shared service-page styles (pages/services.css):
+   the "Where to start" line is set as a display sentence, the page's one
+   large typographic moment before the closing band.
+   ========================================================================== */
+
+.start-line {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-size: var(--display-3);
+  font-weight: 500;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-display);
+  color: var(--ink);
+  text-wrap: balance;
+}

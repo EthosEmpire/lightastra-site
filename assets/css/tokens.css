@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Light Astra — tokens
+   The whole design system in one place: colour, type, space, radii, shadows,
+   motion. Nothing here paints anything; every other stylesheet reads from it.
+   Direction "Monolith": milk surfaces, deep-ink type, graphite hairlines.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- surfaces (milk family) ------------------------------------------- */
+  --milk: #f6f2ea;          /* the page */
+  --milk-soft: #faf7f1;     /* a lighter section */
+  --milk-deep: #efe9de;     /* a deeper cream section, the footer */
+  --paper: #fdfbf7;         /* cards and plates */
+  --surface: var(--milk);   /* the colour behind the current section (dividers cut into it) */
+
+  /* ---- ink family ------------------------------------------------------- */
+  --ink: #101014;           /* headings, primary buttons, the closing band */
+  --ink-2: #2a2a30;         /* body text */
+  --ink-3: #5a5a63;         /* secondary text, captions (6.3:1 on milk) */
+  --ink-4: #8a8a92;         /* decorative only: large numerals, icons at rest */
+  --danger: #a8322e;        /* form errors: 5.9:1 on milk */
+  --on-ink: var(--milk);    /* text on the ink band */
+  --on-ink-muted: #bab6ad;  /* secondary text on the ink band (8:1) */
+
+  /* ---- hairlines ---------------------------------------------------------- */
+  --hairline: rgb(16 16 20 / 0.14);
+  --hairline-strong: rgb(16 16 20 / 0.34);
+  --hairline-on-ink: rgb(246 242 234 / 0.18);
+  --hairline-on-ink-strong: rgb(246 242 234 / 0.4);
+
+  /* ---- the one accent, drawn from the brand ----------------------------- */
+  --accent: #5847c9;                 /* violet-blue: links on hover, focus, the odd detail */
+  --accent-soft: rgb(88 71 201 / 0.1);
+  --gold: #c39d45;                   /* a thin gold line, decorative only */
+  --halo-warm: rgb(255 206 160 / 0.6);   /* the warm halo behind the dragon */
+  --halo-cool: rgb(150 140 236 / 0.28);
+  --focus: #3b2cb5;
+
+  /* ---- type -------------------------------------------------------------- */
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;              /* 17px body */
+  --text-md: 1.125rem;
+  --text-lg: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);   /* leads */
+  --text-xl: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);      /* the hero lead, pull quotes */
+
+  --display-1: clamp(2.25rem, 1.15rem + 4.9vw, 4.4rem);     /* the home hero: three lines in a 7/12 column */
+  --display-2: clamp(1.9rem, 1.3rem + 2.5vw, 3.5rem);       /* section and page titles */
+  --display-3: clamp(1.4rem, 1.2rem + 0.9vw, 2rem);         /* sub-sections, large card titles */
+  --title: 1.375rem;                                        /* card titles */
+  --title-sm: 1.125rem;
+
+  --leading-tight: 1.02;
+  --leading-snug: 1.18;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+  --tracking-tight: -0.028em;
+  --tracking-display: -0.02em;
+  --tracking-caps: 0.18em;
+  --tracking-caps-wide: 0.26em;
+
+  /* ---- space ------------------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --section-y: clamp(4.5rem, 3.5rem + 5vw, 8.5rem);   /* vertical rhythm of a section */
+  --section-y-tight: clamp(3rem, 2.5rem + 3vw, 5.5rem);
+  --gutter: clamp(1rem, 0.4rem + 3vw, 2.5rem);        /* 16px at 320, 40px from 1120 */
+  --container: 76rem;                                  /* 1216px */
+  --container-wide: 88rem;
+  --container-narrow: 46rem;
+  --container-text: 40rem;
+  --header-h: 4.25rem;                                 /* phones; responsive.css raises it */
+  --target: 2.75rem;                                   /* 44px minimum pointer target */
+
+  /* ---- shape ------------------------------------------------------------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --border: 1px solid var(--hairline);
+  --border-strong: 1px solid var(--hairline-strong);
+
+  /* ---- depth ------------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgb(16 16 20 / 0.06);
+  --shadow-lift: 0 1px 2px rgb(16 16 20 / 0.05), 0 22px 44px -24px rgb(16 16 20 / 0.38);
+  --shadow-plate: 0 2px 4px rgb(16 16 20 / 0.05), 0 48px 96px -48px rgb(16 16 20 / 0.5);
+  --shadow-sheet: 0 24px 64px -24px rgb(16 16 20 / 0.45);
+
+  /* ---- motion ------------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
+  --dur-fast: 160ms;
+  --dur-base: 320ms;
+  --dur-slow: 700ms;
+  --dur-reveal: 1000ms;
+  --drift: 1;                /* strength of decorative motion: 1 on, 0.5 lite, 0 off */
+}
+
+/* The site switch (<html data-fx>) and the visitor's preference scale decorative motion. */
+html[data-fx="lite"] { --drift: 0.5; }
+html[data-fx="off"] { --drift: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --drift: 0; }
+}
+
+/* An ink section flips the palette for everything inside it. */
+.theme-ink {
+  --surface: var(--ink);
+  --hairline: var(--hairline-on-ink);
+  --hairline-strong: var(--hairline-on-ink-strong);
+  --paper: #1a1a20;
+  --accent: #b7adf5;
+  --focus: #f6f2ea;
+  color: var(--on-ink);
+  background: var(--ink);
+}

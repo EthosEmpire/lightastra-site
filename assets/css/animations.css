@@ -1,0 +1,275 @@
+/* ==========================================================================
+   Light Astra — animations
+   Reveal on scroll, the milk light, the jewel's float, depth (2D → 3D),
+   hover lifts and micro-interactions. Restrained by design. Everything here
+   stops under prefers-reduced-motion and <html data-fx="off">, and nothing
+   is ever hidden by motion: a reveal that never runs still shows its content.
+   ========================================================================== */
+
+/* ---- transitions on interactive things ------------------------------------------- */
+.btn,
+.btn__icon,
+.link-arrow,
+.link-arrow .icon,
+.card,
+.field__control,
+.chips li,
+.tags li,
+.site-nav__link {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-duration: var(--dur-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+/* The arrow nudges on hover; the outbound arrow rises. */
+.btn:hover .btn__icon--arrow,
+.link-arrow:hover .icon--arrow {
+  transform: translateX(3px);
+}
+
+.btn:hover .btn__icon--out,
+.link-arrow:hover .icon--out {
+  transform: translate(2px, -2px);
+}
+
+.pillar__icon,
+.pillar__cta {
+  transition: background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+
+.pillar:hover .pillar__cta .icon--arrow {
+  transform: translateX(4px);
+}
+
+/* ---- hover lifts ------------------------------------------------------------------- */
+.lift {
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--hairline-strong);
+  }
+
+  .lift--plate:hover {
+    box-shadow: var(--shadow-plate);
+  }
+}
+
+/* ---- reveal on scroll (reveal.js adds .reveal-pending below the fold only) ------------ */
+[data-reveal] {
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out), filter var(--dur-reveal) var(--ease-out);
+}
+
+/* A card that both reveals and lifts keeps its quick hover once it is in view: the long
+   reveal timing stays on opacity and filter, the transform answers the pointer at once. */
+.lift[data-reveal]:not(.reveal-pending) {
+  transition: opacity var(--dur-reveal) var(--ease-out), filter var(--dur-reveal) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+
+[data-reveal="fade"].reveal-pending {
+  transform: none;
+}
+
+[data-reveal="scale"].reveal-pending {
+  transform: scale(0.96) translateY(0.75rem);
+}
+
+[data-reveal="left"].reveal-pending {
+  transform: translateX(-1.5rem);
+}
+
+[data-reveal="right"].reveal-pending {
+  transform: translateX(1.5rem);
+}
+
+[data-reveal="blur"].reveal-pending {
+  transform: translateY(0.75rem);
+  filter: blur(6px);
+}
+
+/* Stagger: delay steps for siblings. */
+[data-reveal-delay="1"] { transition-delay: 90ms; }
+[data-reveal-delay="2"] { transition-delay: 180ms; }
+[data-reveal-delay="3"] { transition-delay: 270ms; }
+[data-reveal-delay="4"] { transition-delay: 360ms; }
+[data-reveal-delay="5"] { transition-delay: 450ms; }
+[data-reveal-delay="6"] { transition-delay: 540ms; }
+
+/* The hero's entrance on load (CSS only, no observer needed). */
+.enter {
+  animation: enter var(--dur-reveal) var(--ease-out) both;
+}
+
+.enter--2 { animation-delay: 120ms; }
+.enter--3 { animation-delay: 240ms; }
+.enter--4 { animation-delay: 360ms; }
+.enter--5 { animation-delay: 480ms; }
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.enter--jewel {
+  animation: enter-jewel 1400ms var(--ease-out) 200ms both;
+}
+
+@keyframes enter-jewel {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- the milk light: three fields drifting very slowly ------------------------------ */
+.milk__field--a {
+  animation: drift-a 26s var(--ease-in-out) infinite alternate;
+}
+
+.milk__field--b {
+  animation: drift-b 32s var(--ease-in-out) infinite alternate;
+}
+
+.milk__field--c {
+  animation: drift-c 38s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(6%, 8%, 0) scale(1.08); }
+}
+
+@keyframes drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-8%, 6%, 0) scale(1.06); }
+}
+
+@keyframes drift-c {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(8%, -6%, 0); }
+}
+
+/* Paused while its section is off screen (milk.js adds the class) and under "lite" halved. */
+.is-offscreen .milk__field {
+  animation-play-state: paused;
+}
+
+html[data-fx="lite"] .milk__field {
+  animation-duration: 60s;
+}
+
+/* ---- the jewel: floats, and its halo breathes ---------------------------------------- */
+.jewel__float {
+  animation: float 7s var(--ease-in-out) infinite alternate;
+}
+
+.jewel__halo {
+  animation: breathe 9s var(--ease-in-out) infinite alternate;
+}
+
+.jewel__ring {
+  animation: ring-turn 90s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translate3d(0, -0.6%, 0) rotate(-0.4deg); }
+  to { transform: translate3d(0, 1.4%, 0) rotate(0.4deg); }
+}
+
+@keyframes breathe {
+  from { opacity: 0.8; transform: translateZ(-60px) scale(0.98); }
+  to { opacity: 1; transform: translateZ(-60px) scale(1.05); }
+}
+
+@keyframes ring-turn {
+  from { transform: translateZ(-40px) rotate(0deg); }
+  to { transform: translateZ(-40px) rotate(360deg); }
+}
+
+/* ---- depth: the perspective stage depth.js works in ---------------------------------- */
+.depth {
+  perspective: 1200px;
+}
+
+[data-depth] {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+/* ---- the star twinkle: a divider's star, an eyebrow's mark ------------------------------ */
+.twinkle {
+  animation: twinkle 4.5s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.55; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.08); }
+}
+
+/* ---- reduced motion and the site switch: every decorative motion stops ------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .enter,
+  .enter--jewel {
+    animation: none;
+  }
+
+  .jewel__halo {
+    opacity: 1;
+  }
+}
+
+html[data-fx="off"] .milk__field,
+html[data-fx="off"] .jewel__float,
+html[data-fx="off"] .jewel__halo,
+html[data-fx="off"] .jewel__ring,
+html[data-fx="off"] .twinkle,
+html[data-fx="off"] .enter,
+html[data-fx="off"] .enter--jewel {
+  animation: none;
+}
+
+html[data-fx="off"] .reveal-pending {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+html[data-fx="off"] .lift:hover {
+  transform: none;
+}

@@ -1,0 +1,399 @@
+/* ==========================================================================
+   Light Astra — Business Apps & Systems (a chapter of pricing.html)
+   The one place the site borrows the dragon emblem's colours: blurred colour
+   fields and the blurred emblem itself drift behind the copy, a pointer light
+   answers the mouse on desktop, and the chapter fades from milk into the
+   atmosphere and back out into the next section. Cards, bullets, chips,
+   checklist, notice, figure and buttons are shared components; this sheet
+   holds only the atmosphere, the gradient hairlines and the chapter's layout.
+   ========================================================================== */
+
+.apps {
+  /* sampled from the dragon emblem: indigo, sky blue, magenta, lavender, plum */
+  --apps-indigo: 42 43 143;
+  --apps-blue: 78 163 234;
+  --apps-magenta: 187 73 201;
+  --apps-lavender: 212 173 221;
+  --apps-fade: 9rem;
+  --mx: 0px;
+  --my: 0px;
+  --apps-light: 0;
+  --apps-scroll: 0.5;
+  position: relative;
+  isolation: isolate;
+  background: var(--milk);
+}
+
+/* ---- the atmosphere ------------------------------------------------------------ */
+.apps__atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* The wash: milk above, the next section's surface below, colour in between. */
+.apps__atmosphere::before,
+.apps__atmosphere::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--apps-fade);
+  z-index: 2;
+}
+
+.apps__atmosphere::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--milk), transparent);
+}
+
+.apps__atmosphere::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--milk-deep), transparent);
+}
+
+.apps__field {
+  position: absolute;
+  width: 46rem;
+  height: 46rem;
+  border-radius: 50%;
+  opacity: 0.78;
+  filter: blur(48px);
+  will-change: transform;
+  animation: apps-drift 44s var(--ease-in-out) infinite alternate;
+}
+
+.apps__field--blue {
+  left: -16rem;
+  top: -12rem;
+  background: radial-gradient(closest-side, rgb(var(--apps-blue) / 0.62), transparent 72%);
+}
+
+.apps__field--magenta {
+  right: -12rem;
+  top: 28%;
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(closest-side, rgb(var(--apps-magenta) / 0.38), transparent 72%);
+  animation-duration: 56s;
+  animation-delay: -22s;
+}
+
+.apps__field--lavender {
+  left: 22%;
+  bottom: -18rem;
+  width: 52rem;
+  height: 52rem;
+  background: radial-gradient(closest-side, rgb(var(--apps-lavender) / 0.7), transparent 72%);
+  animation-duration: 50s;
+  animation-delay: -10s;
+}
+
+/* The pointer light: a fixed disc the script positions with --mx/--my (pixels inside the
+   section) through a transform, so following the pointer never repaints the section. */
+.apps__light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 76rem;
+  height: 76rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 0.5), rgb(var(--apps-blue) / 0.08) 35%, transparent 70%);
+  opacity: var(--apps-light);
+  transform: translate3d(calc(var(--mx) - 50%), calc(var(--my) - 50%), 0);
+  will-change: transform, opacity;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+/* The emblem, oversized, softened and faint — the chapter's one dragon moment in the background. */
+.apps__dragon {
+  position: absolute;
+  right: -8%;
+  top: 4%;
+  width: min(62vw, 46rem);
+  height: auto;
+  opacity: 0.26;
+  filter: blur(12px) saturate(1.15);
+  transform: translate3d(0, calc((0.5 - var(--apps-scroll)) * 7rem), 0);
+  will-change: transform;
+}
+
+@keyframes apps-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(5rem, 3rem, 0) scale(1.08);
+  }
+}
+
+/* Off screen (business-apps.js / milk.js convention) the drift pauses. */
+.apps.is-offscreen .apps__field {
+  animation-play-state: paused;
+}
+
+/* ---- the content above the atmosphere -------------------------------------------- */
+.apps__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Small text over the colour wash keeps a safe ink. */
+.apps .eyebrow {
+  color: var(--ink);
+}
+
+.apps .caption {
+  color: var(--ink-2);
+}
+
+.apps__examples {
+  margin-top: var(--space-6);
+}
+
+/* Glass plates: paper with a touch of translucency and a one-pixel blue → magenta edge. */
+.apps-card,
+.apps-tier {
+  position: relative;
+  background: rgb(253 251 247 / 0.86);
+  border-color: transparent;
+  box-shadow: var(--shadow-plate);
+}
+
+/* The one-pixel gradient edge, drawn where the (transparent) card border sits; browsers
+   without mask compositing keep the plain hairline instead. */
+@supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+  .apps-card::before,
+  .apps-tier::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgb(var(--apps-blue) / 0.65), rgb(var(--apps-magenta) / 0.55) 60%, rgb(var(--apps-lavender) / 0.9));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@supports not ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .apps-card,
+  .apps-tier {
+    border-color: var(--hairline-strong);
+  }
+}
+
+/* 1 · the build */
+.apps-card {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-7);
+}
+
+.apps-card__copy > * + * {
+  margin-top: var(--space-4);
+}
+
+.apps-card .card__foot {
+  padding-top: var(--space-5);
+}
+
+/* The sharp emblem beside the copy: a depth plate (depth.js tilts it) on a soft halo. */
+.apps-card__emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-self: center;
+}
+
+.apps-card__emblem::before {
+  content: "";
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--apps-blue) / 0.45), rgb(var(--apps-magenta) / 0.22) 55%, transparent 72%);
+  filter: blur(18px);
+}
+
+.apps-card__dragon {
+  position: relative;
+  width: 11rem;
+  height: auto;
+  filter: drop-shadow(0 18px 30px rgb(var(--apps-indigo) / 0.35));
+}
+
+/* The join between the two costs. */
+.apps__plus {
+  display: grid;
+  place-items: center;
+  margin-block: var(--space-5);
+}
+
+.apps__plus span {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: var(--border-strong);
+  border-radius: 50%;
+  background: var(--paper);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* 2 · the operation */
+.apps__plans-head > * + * {
+  margin-top: var(--space-3);
+}
+
+.apps__plans-text {
+  max-width: 60ch;
+  color: var(--ink-2);
+}
+
+.apps__tiers {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.apps-tier > * + * {
+  margin-top: var(--space-3);
+}
+
+.apps-tier__name {
+  font-size: var(--title);
+}
+
+.apps-tier__range {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  color: var(--ink-2);
+}
+
+.apps-tier__count {
+  font-family: var(--font-display);
+  font-size: var(--display-3);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  color: var(--ink);
+}
+
+.apps-tier__text {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.apps__includes {
+  margin-top: var(--space-6);
+}
+
+.apps__checklist {
+  margin-top: var(--space-3);
+}
+
+.apps__note {
+  margin-top: var(--space-5);
+}
+
+/* ---- motion off: the composition stays, the movement stops ---------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .apps__field {
+    animation: none;
+  }
+
+  .apps__dragon {
+    transform: none;
+  }
+
+  .apps__light {
+    display: none;
+  }
+}
+
+html[data-fx="off"] .apps__field {
+  animation: none;
+}
+
+html[data-fx="lite"] .apps__field {
+  animation-duration: 90s;
+}
+
+html[data-fx="off"] .apps__dragon {
+  transform: none;
+}
+
+html[data-fx="off"] .apps__light {
+  display: none;
+}
+
+/* ---- breakpoints --------------------------------------------------------------- */
+/* Phones: lighter blur, a smaller emblem, no pointer light (no fine pointer anyway). */
+@media (max-width: 599px) {
+  .apps__field {
+    width: 30rem;
+    height: 30rem;
+    filter: blur(32px);
+    animation: none; /* a still blur is rasterised once; drifting it would re-filter every frame */
+    will-change: auto;
+  }
+
+  .apps__dragon {
+    width: 90vw;
+    right: -30vw;
+    top: 2%;
+    opacity: 0.2;
+    filter: blur(8px);
+  }
+
+  .apps__light {
+    display: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .apps__tiers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .apps-tier:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .apps__checklist {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .apps-card {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    align-items: center;
+  }
+
+  .apps-card__dragon {
+    width: 18rem;
+  }
+
+  .apps__tiers {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .apps-tier:last-child {
+    grid-column: auto;
+  }
+
+  .apps__checklist {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
