@@ -17,7 +17,7 @@
  * Markup contract (site/layout.html):
  *   [data-header]      the <header>
  *   [data-nav-toggle]  the menu <button> (aria-expanded, aria-controls)
- *   [data-nav]         the <nav>; page links are plain <a href="/page.html">, section links <a href="#id">
+ *   [data-nav]         the <nav>; page links are plain <a href="page.html"> (page-relative), section links <a href="#id">
  *   main, footer       the page behind the sheet; carry the inert attribute while it is open
  *
  * Without JavaScript the navigation is simply always visible (see boot.js).
