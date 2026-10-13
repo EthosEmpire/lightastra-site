@@ -568,6 +568,13 @@
   height: 4rem;
 }
 
+/* A landscape client logo that brings its own ground (Cela Auto Sales): the mark's height, its own width. */
+.project__mark.project__mark--wide {
+  flex: none;
+  width: auto;
+  border-radius: var(--radius-sm);
+}
+
 /* ---- the founder portrait ----------------------------------------------------------- */
 .portrait {
   position: relative;
