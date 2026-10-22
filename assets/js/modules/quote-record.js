@@ -27,7 +27,7 @@ export const SERVICE_TYPES = {
 };
 
 /** The employee ranges of the business-app question, as the form lists them. */
-export const EMPLOYEE_RANGES = ['1–5', '6–20', '21+', 'Not sure yet'];
+export const EMPLOYEE_RANGES = ['1–5', '6–20', '21–50', '51–500', '501+', 'Not sure yet'];
 
 function clean(value) {
   return String(value ?? '').trim();

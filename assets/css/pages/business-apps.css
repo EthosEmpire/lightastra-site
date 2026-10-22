@@ -385,12 +385,20 @@ html[data-fx="off"] .apps__light {
     width: 18rem;
   }
 
+  /* Five tiers as three over two: a six-column track, the first row three cards of two columns,
+     the second row two cards of three. */
   .apps__tiers {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
+  .apps-tier,
   .apps-tier:last-child {
-    grid-column: auto;
+    grid-column: span 2;
+  }
+
+  .apps-tier:nth-child(n + 4),
+  .apps-tier:last-child {
+    grid-column: span 3;
   }
 
   .apps__checklist {
